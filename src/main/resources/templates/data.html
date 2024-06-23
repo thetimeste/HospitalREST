@@ -117,10 +117,9 @@
                 })
                 .then(res => {
                     if (res.ok) {
-                        // If response is OK, proceed to redirect or handle success
+                        // If response is OK, proceed to redirect 
                         window.location.href = "/questions";
                     } else {
-                        // Handle error responses if needed
                         return res.json().then(error => {
                             throw new Error(error.message);
                         });

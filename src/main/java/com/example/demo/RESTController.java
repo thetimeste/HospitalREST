@@ -22,8 +22,6 @@ HealthCalculator healthCalculator = new HealthCalculator();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("main.html");
         return modelAndView;
-
-
     }
 
     @GetMapping("/data")
@@ -83,7 +81,4 @@ HealthCalculator healthCalculator = new HealthCalculator();
         return ResponseEntity.ok(response);
     }
   
- 
-     
-     
 }

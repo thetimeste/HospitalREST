@@ -61,7 +61,7 @@
 </html>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        fetch('http://localhost:8080/setCookie') // Ensure to use HTTPS URL
+        fetch('http://localhost:8080/setCookie') 
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
