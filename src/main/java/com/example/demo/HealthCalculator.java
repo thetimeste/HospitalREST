@@ -1,20 +1,11 @@
 package com.example.demo;
-
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
-import java.io.File;
 
 public class HealthCalculator {
-        private static final String CSV_FILE = "C:\\Users\\Stefano\\Desktop\\web services\\demo\\high_risk_patients.csv";
+        private static final String CSV_FILE = "high_risk_patients.csv";
         ArrayList<User> users = new ArrayList<>();
         ArrayList<Questions> questions = new ArrayList<>();
 
@@ -81,15 +72,13 @@ public class HealthCalculator {
             sb.append(questions.isCardiovascularDisturbs()).append("\n");;
  
             writer.write(sb.toString());
-
             System.out.println("User "+user.getUserID()+ " added to CSV file successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     
-    }
+}
 
        
 
