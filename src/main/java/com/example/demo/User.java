@@ -1,6 +1,7 @@
 package com.example.demo;
 
 public class User {
+    private String userID;
     private String name;
     private String surname;
     private String birthdate;
@@ -48,14 +49,27 @@ public class User {
         this.phone = phone;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+
+
 @Override
 public String toString() {
     return "UserData{" +
-            "name='" + name + '\'' +
+            "userID='" + userID + '\'' +
+            ", name='" + name + '\'' +
             ", surname='" + surname + '\'' +
             ", birthdate='" + birthdate + '\'' +
             ", socialnumber='" + socialnumber + '\'' +
             ", phone='" + phone + '\'' +
             '}';
 }
+
+
 }

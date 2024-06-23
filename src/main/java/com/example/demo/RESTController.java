@@ -1,32 +1,29 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import jakarta.servlet.http.HttpServletResponse;
-
-import javax.swing.text.View;
-
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
  
 
-
 @Controller
 public class RESTController {
+
+HealthCalculator healthCalculator = new HealthCalculator();
 
     @GetMapping("/")
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("main.html");
         return modelAndView;
+
+
     }
 
     @GetMapping("/data")
@@ -37,10 +34,10 @@ public class RESTController {
     }
 
     @PostMapping("/data")
-    public String postdata(@RequestBody User userData) {
-
+    public ResponseEntity<?> postdata(@RequestBody User userData) {
+        healthCalculator.addUserToArrayList(userData);
         System.out.println("Received data: " + userData);
-        return "redirect:/questions.html"; 
+        return ResponseEntity.accepted().body("ok");
     }
  
     @GetMapping("/questions")
@@ -49,16 +46,44 @@ public class RESTController {
         modelAndView.setViewName("questions.html");
         return modelAndView;
     }
-
-    @PostMapping("/questions")
-    public String postQuestions(Questions questionsData, HttpServletResponse response) {
-        System.out.println("Received data: " + questionsData);
-        return "redirect:/result"; 
-    }
-
-
  
-
-    
-    
+    @PostMapping("/questions")
+    public ResponseEntity<?> postQuestions(@RequestBody Questions questionsData) {
+        healthCalculator.addQuestionsToArrayList(questionsData);
+        System.out.println("Received data: " + questionsData);
+        boolean status = healthCalculator.calculateHealthStatus(questionsData);
+        if(status){
+            return ResponseEntity.accepted().body(Collections.singletonMap("severity", "high"));
+        }
+        else{
+            return ResponseEntity.accepted().body(Collections.singletonMap("severity", "low"));
+        }
+    }
+ 
+    @GetMapping("/result_ok")
+    public ModelAndView getresultok() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("result_ok.html");
+        return modelAndView;
+    } 
+  
+    @GetMapping("/result_danger")
+    public ModelAndView getresultdanger() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("result_danger.html");
+        return modelAndView;
+    }
+ 
+    @GetMapping("/setCookie")
+    public ResponseEntity<Map<String, String>> setCookie() {
+        int randomInt = (int) (Math.random() * Integer.MAX_VALUE);
+        Map<String, String> response = new HashMap<>();
+        String value = Integer.toString(randomInt);
+        response.put("id", value); 
+        return ResponseEntity.ok(response);
+    }
+  
+ 
+     
+     
 }

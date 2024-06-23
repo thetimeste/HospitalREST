@@ -1,12 +1,27 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Questions {
     private double temperature;
+
+    @JsonProperty("poisonous_substances")
     private boolean poisonousSubstances;
+
+    @JsonProperty("breathe_correctly")
     private boolean breatheCorrectly;
+
+    @JsonProperty("assumed_drug")
     private boolean assumedDrug;
+
+    @JsonProperty("diabetes")
     private boolean diabetes;
+
+    @JsonProperty("cardiovascular_disturbs")
     private boolean cardiovascularDisturbs;
+
+    @JsonProperty("userID")
+    private String userID;
 
     // Constructors, getters, and setters
 
@@ -61,10 +76,19 @@ public class Questions {
         this.cardiovascularDisturbs = cardiovascularDisturbs;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
     @Override
     public String toString() {
         return "Questions{" +
-                "temperature=" + temperature +
+                "userID='" + userID + '\'' +
+                ", temperature=" + temperature +
                 ", poisonousSubstances=" + poisonousSubstances +
                 ", breatheCorrectly=" + breatheCorrectly +
                 ", assumedDrug=" + assumedDrug +

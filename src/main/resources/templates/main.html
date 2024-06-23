@@ -59,3 +59,23 @@
     </div>
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('http://localhost:8080/setCookie') // Ensure to use HTTPS URL
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem('userID', data.id); // Store userID in localStorage
+                console.log('ID stored in localStorage:', data.id);
+            })
+            .catch(error => {
+                console.error('Error fetching or setting ID:', error);
+            });
+    });
+
+
+</script>
